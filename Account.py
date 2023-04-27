@@ -14,9 +14,9 @@ def login():
     userlist = cursor.fetchall()
     for x in userlist:
         passwordinput = input("What is your password? \n")
-        if (passwordinput = x[3]):
+        if (passwordinput == x[3]):
             print("Logged in\n")
-            return True
+            return userinput
         else:
             print("Incorrect user ID or password\n")
             return False
@@ -34,7 +34,7 @@ def createAccount():
     userlist = cursor.fetchall()
     i = 0
     for x in userlist:#increments i to make new unique id
-        i++
+        i+=1
     
     print("Welcome to account creation\n")
     
@@ -48,7 +48,7 @@ def createAccount():
     csv = input("Please enter your card security number\n")
     
     
-    cursor.execute("INSERT INTO user (UserId, FirstName, LastName, Password, BillingAddress, ShippingAddress, DateOfBirth, CardNumber, SecurityNumber) VALUES(?,?,?,?,?,?,?,?,?)", (i, fname, lname,Password,bil,ship,dob,cnum,csv))
+    cursor.execute("INSERT INTO user (UserId, FirstName, LastName, Password, BillingAddress, ShippingAddress, DateOfBirth, CardNumber, SecurityNumber) VALUES(?,?,?,?,?,?,?,?,?)", (i, fname, lname,password,bil,ship,dob,cnum,csv))
     connection.commit()
     print("Account created\n")
     cursor.close()
@@ -65,7 +65,7 @@ class Account:
         cursor.execute(f"SELECT * FROM user WHERE UserId={self.userID}")
         userlist = cursor.fetchall()
         for x in userlist:
-            print("User ID": x[0])
+            print("User ID:", x[0])
             print("First name:", x[1])
             print("Last Name:", x[2])
             print("Password:", x[3])
