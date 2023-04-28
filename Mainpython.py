@@ -1,4 +1,4 @@
-import Checkout
+from Checkout import *
 import OrderHistory
 import Account
 import Inventory

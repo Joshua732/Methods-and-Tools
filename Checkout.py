@@ -12,7 +12,9 @@ except:
     sys.exit()
 cursor = connection.cursor()
 ## where it only views the current login persons cart
-def viewchart(Mainid):
+def ViewCart(Mainid):
+    connection = sqlite3.connect("Workbase.db")
+    cursor = connection.cursor()
     cursor.execute(f"SELECT * FROM cart WHERE UserId={Mainid}")
     records = cursor.fetchall()
 
@@ -29,7 +31,11 @@ def viewchart(Mainid):
         ItemCost = ItemCost * ItemQuantity1
         print(ItemCost)
         print("\n")
+        cursor.close()
+        connection.close()
 def AddToCart(UserId):
+    connection = sqlite3.connect("Workbase.db")
+    cursor = connection.cursor()
     Name1 = input("Enter item name\n")
     Itemcou1 = input("Enter item count\n")
     cursor.execute(f"SELECT * FROM inventory WHERE ItemName='{Name1}'")
@@ -44,14 +50,22 @@ def AddToCart(UserId):
 
         cursor.execute("INSERT INTO cart (UserId, ItemId, ItemName, ItemDescription, ItemQuantity, ItemCost) VALUES(?,?,?,?,?,?)", (UserId, ItemId, ItemName,ItemDescription,Itemcou1,ItemCost))
         connection.commit()
+        cursor.close()
+        connection.close()
 def DeleteFromCart(UserId):
+    connection = sqlite3.connect("Workbase.db")
+    cursor = connection.cursor()
     Name1 = input("Enter item name\n")
     Itemcou1 = input("Enter item count\n")
 ##Why would anyone put the same thing into the cart more than once
     cursor.execute("DELETE FROM cart WHERE ItemName=? AND ItemQuantity=? AND UserId=?", (Name1,Itemcou1,UserId,))
     connection.commit()
+    cursor.close()
+    connection.close()
 
 def CheckoutFromCart(UserId):
+    connection = sqlite3.connect("Workbase.db")
+    cursor = connection.cursor()
     cursor.execute(f"SELECT * FROM cart WHERE UserId={UserId}")
     records = cursor.fetchall()
     for x in records:
@@ -77,11 +91,17 @@ def CheckoutFromCart(UserId):
         cursor.execute("DELETE FROM cart WHERE ItemName=? AND ItemQuantity=? AND UserId=?", (ItemName, ItemQuantity1, UserId,))
         cursor.execute("UPDATE inventory SET ItemQuantity=? WHERE ItemId=?", (ItemQuantityM, ItemId))
         connection.commit()
+        cursor.close()
+        connection.close()
 
 def DeleteFromCartAccountDelete(UserId):
+    connection = sqlite3.connect("Workbase.db")
+    cursor = connection.cursor()
 ##Why would anyone put the same thing into the cart more than once
     cursor.execute("DELETE FROM cart WHERE UserId=?", (UserId,))
     connection.commit()
+    cursor.close()
+    connection.close()
 
 ##nume = 312
 ##AddToCart(nume)
