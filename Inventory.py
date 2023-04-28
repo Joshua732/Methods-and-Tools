@@ -19,8 +19,6 @@ print()
 
 # allows queries to be sent
 cursor = connection.cursor()
-cursor.execute("SELECT * FROM inventory")
-print(cursor.fetchall())
 
 class Inventory:
 
@@ -32,7 +30,6 @@ class Inventory:
         print("3. Add item")
         print("4. Remove item")
         print("5. Exit")
-        option = int(input("Select an option: "))
 
     # function for viewing inventory
     def viewInventory(self):
@@ -40,31 +37,22 @@ class Inventory:
         display = cursor.fetchall()
 
         for i in display:
-            print("Item Name: ", i[0])
-            print("Item Description: ", i[1])
-            print("Item Number: ", i[2])
+            print("Item Num: ", i[0])
+            print("Item Name: ", i[1])
+            print("Item Description: ", i[2])
             print("Item Quantity: ", i[3])
             print("Item Cost: ", i[4])
-            print("Item Availability: ", i[5])
             print("\n")
 
     # function that updates inventory based on input
     def updateInventory(self):
         quantitySub = int(input("Enter quantity to be updated: "))
         itemNum = input("Select itemID to be updated: ")
-        cursor.execute("UPDATE inventory SET itemQuantity = itemQuantity - ? WHERE itemNum = ?", (quantitySub, itemNum))
+        cursor.execute("UPDATE inventory SET itemQuantity = itemQuantity - ? WHERE itemId = ?", (quantitySub, itemNum))
         connection.commit()
 
-        # updates item availability when quantity 0
-        cursor.execute("SELECT itemQuantity FROM inventory WHERE itemNum=?", (itemNum,))
-        oos = cursor.fetchone()[0]
-        if oos == 0:
-            availUpdate = "out of stock"
-            cursor.execute(("UPDATE inventory SET itemAvailability =? WHERE itemNum=?"), (availUpdate, itemNum))
-            connection.commit()
-
         print("\nInventory Updated\n")
-        cursor.execute("SELECT * FROM inventory WHERE itemNum= ?", (itemNum,))
+        cursor.execute("SELECT * FROM inventory WHERE itemId= ?", (itemNum,))
 
     # adds items to database
     def itemAdd(self):
@@ -73,26 +61,14 @@ class Inventory:
         itemID = input("Enter item ID: ")
         quantity = input(":Enter quantity: ")
         cost = input("Enter cost: ")
-        availability = input("Enter availability: ")
-        cursor.execute("INSERT INTO inventory VALUES (?,?,?,?,?,?)", (name, desc, itemID, quantity, cost, availability))
+        cursor.execute("INSERT INTO inventory VALUES (?,?,?,?,?)", (itemID, name, desc, quantity, cost))
         connection.commit()
         print("item added\n")
 
     # removes items from database
     def itemRemove(self):
         itemRemove = int(input("Enter item ID to be deleted: "))
-        cursor.execute("DELETE FROM inventory WHERE itemNum= ?", (itemRemove,))
+        cursor.execute("DELETE FROM inventory WHERE itemId= ?", (itemRemove,))
         connection.commit()
         print("Item deleted\n")
 
-
-
-
-
-
-
-
-
-
-
-    
