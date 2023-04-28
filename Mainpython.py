@@ -74,7 +74,7 @@ def home(userId):
             case 4:
               # Delete your account
               account.Accdel()
-              Checkout.DeleteFromCartAccountDelete(userId)
+              DeleteFromCartAccountDelete(userId)
               currentuser.deleteHistory()
               return
             
@@ -101,20 +101,20 @@ def home(userId):
 
             case 2:
               # View cart
-              Checkout.viewchart(userId)
+              ViewCart(userId)
 
             case 3:
               # Add to cart
-              Checkout.AddToCart(userId)
+              AddToCart(userId)
 
             case 4:
               # Delete from cart
-              Checkout.DeleteFromCart(userId)
+              DeleteFromCart(userId)
 
             case 5:
               # Checkout
               currentuser.addOrderToHistory()
-              Checkout.CheckoutFromCart(userId)
+              CheckoutFromCart(userId)
             case 6:
               # Go back
               break
