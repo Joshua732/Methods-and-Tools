@@ -12,7 +12,7 @@ def home(userId):
   inventory = Inventory.Inventory()
 
   while 1:
-    print("1. User Account\n2. Shop\n3. Logout\n4. Inventory Management")
+    print("1. User Account\n2. Shop\n3. Logout")
     x = int(input("Enter your choice: "))
     print("")
 
@@ -128,34 +128,6 @@ def home(userId):
         print("Logging out...")
         break
         
-      case 4:
-        #inventory management
-        inventory = Inventory.Inventory()
-
-                while 1:
-                    inventory.menuDisplay()
-                    option = int(input("Select an option: "))
-
-                    match option:
-
-                        case 1:
-                            inventory.viewInventory()
-
-                        case 2:
-                            inventory.updateInventory()
-
-                        case 3:
-                            inventory.itemAdd()
-
-                        case 4:
-                            inventory.itemRemove()
-
-                        case 5:
-                            print("Goodbye!")
-                            break
-                        case _:
-                            print("Invalid choice please try again!")
-
       case _:
         # Default case
         print("Invalid choice... Try again!")
