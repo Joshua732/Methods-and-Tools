@@ -80,7 +80,7 @@ class Account:
     
     
     def Accdel(self):
-        cursor.execute("DELETE FROM user WHERE UserId=?", (self.userID))
+        cursor.execute("DELETE FROM user WHERE UserId=?", (self.userID,))
         connection.commit()
         return True
         
