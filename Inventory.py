@@ -3,7 +3,7 @@ import sys
 
 # connecting to the database
 try:
-    connection = sqlite3.connect(r"C:\Users\Keenan\Desktop\SQLite 3\Workbase.db")
+    connection = sqlite3.connect("Workbase.db")
 
     print("Database connected")
 
