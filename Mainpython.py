@@ -159,6 +159,7 @@ def main():
       case 3:
         # Exit program
         print("Goodbye!")
+        exit()
         break
 
       case _:
