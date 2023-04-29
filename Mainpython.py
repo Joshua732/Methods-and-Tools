@@ -126,6 +126,7 @@ def home(userId):
       case 3:
         # Logout
         print("Logging out...")
+        main()
         break
         
       case _:
