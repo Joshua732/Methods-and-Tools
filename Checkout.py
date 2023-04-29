@@ -31,8 +31,6 @@ def ViewCart(Mainid):
         ItemCost = ItemCost * ItemQuantity1
         print("ItemCost:", ItemCost)
         print("\n")
-        cursor.close()
-        connection.close()
 def AddToCart(UserId):
     connection = sqlite3.connect("Workbase.db")
     cursor = connection.cursor()
@@ -50,8 +48,6 @@ def AddToCart(UserId):
 
         cursor.execute("INSERT INTO cart (UserId, ItemId, ItemName, ItemDescription, ItemQuantity, ItemCost) VALUES(?,?,?,?,?,?)", (UserId, ItemId, ItemName,ItemDescription,Itemcou1,ItemCost))
         connection.commit()
-        cursor.close()
-        connection.close()
 def DeleteFromCart(UserId):
     connection = sqlite3.connect("Workbase.db")
     cursor = connection.cursor()
@@ -61,8 +57,6 @@ def DeleteFromCart(UserId):
 ##Why would anyone put the same thing into the cart more than once
     cursor.execute("DELETE FROM cart WHERE ItemName=? AND ItemQuantity=? AND UserId=?", (Name1,Itemcou1,UserId,))
     connection.commit()
-    cursor.close()
-    connection.close()
 
 def CheckoutFromCart(UserId):
     connection = sqlite3.connect("Workbase.db")
@@ -92,8 +86,6 @@ def CheckoutFromCart(UserId):
         cursor.execute("DELETE FROM cart WHERE ItemName=? AND ItemQuantity=? AND UserId=?", (ItemName, ItemQuantity1, UserId,))
         cursor.execute("UPDATE inventory SET ItemQuantity=? WHERE ItemId=?", (ItemQuantityM, ItemId))
         connection.commit()
-        cursor.close()
-        connection.close()
 
 def DeleteFromCartAccountDelete(UserId):
     connection = sqlite3.connect("Workbase.db")
@@ -101,8 +93,6 @@ def DeleteFromCartAccountDelete(UserId):
 ##Why would anyone put the same thing into the cart more than once
     cursor.execute("DELETE FROM cart WHERE UserId=?", (UserId,))
     connection.commit()
-    cursor.close()
-    connection.close()
 
 ##nume = 312
 ##AddToCart(nume)
