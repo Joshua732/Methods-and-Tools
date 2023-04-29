@@ -1,5 +1,6 @@
 import sqlite3
 import sys
+##Please note that I was going to convert this to a true class but the spacing never seemed to work
 try:
     connection = sqlite3.connect("Workbase.db")
 
@@ -55,6 +56,7 @@ def AddToCart(UserId):
 def DeleteFromCart(UserId):
     connection = sqlite3.connect("Workbase.db")
     cursor = connection.cursor()
+    print("The name and how much you ordered must be put in\n")
     Name1 = input("Enter item name\n")
     Itemcou1 = input("Enter item count\n")
 ##Why would anyone put the same thing into the cart more than once
