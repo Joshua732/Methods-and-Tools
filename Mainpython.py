@@ -73,9 +73,9 @@ def home(userId):
 
             case 4:
               # Delete your account
-              account.Accdel()
               DeleteFromCartAccountDelete(userId)
               currentuser.deleteHistory()
+              account.Accdel()
               return
             
             case 5:
@@ -126,7 +126,6 @@ def home(userId):
       case 3:
         # Logout
         print("Logging out...")
-        main()
         break
         
       case _:
@@ -143,23 +142,21 @@ def main():
     match a:
       case 1:
         # Login Screen
-        while 1:
-          userId = Account.login()
-          if userId != False:
-            home(userId)
-          else:
-            print("Invalid")
+        userId = Account.login()
+        if userId != False:
+          home(userId)
+        else:
+          print("Invalid")
 
       case 2:
         # Create account screen
-        while 1:
-          userId = Account.createAccount()
-          home(userId)
+        
+        userId = Account.createAccount()
+        home(userId)
 
       case 3:
         # Exit program
         print("Goodbye!")
-        exit()
         break
 
       case _:
