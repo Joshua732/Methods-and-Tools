@@ -3,7 +3,7 @@ import sys
 
 # connecting to the database
 try:
-    connection = sqlite3.connect("Workbase.db")
+    connection = sqlite3.connect(r"C:\Users\Keenan\Desktop\SQLite 3\Workbase.db")
 
     print("Database connected")
 
@@ -23,6 +23,7 @@ cursor = connection.cursor()
 class Inventory:
 
     # displays menu
+    # not needed for project but left in
     def menuDisplay(self):
         print("-----Inventory-----")
         print("1. Display Inventory")
@@ -36,6 +37,7 @@ class Inventory:
         cursor.execute("SELECT * FROM inventory")
         display = cursor.fetchall()
 
+        # loop displays items
         for i in display:
             print("Item Num: ", i[0])
             print("Item Name: ", i[1])
@@ -45,16 +47,16 @@ class Inventory:
             print("\n")
 
     # function that updates inventory based on input
-    def updateInventory(self):
-        quantitySub = int(input("Enter quantity to be updated: "))
-        itemNum = input("Select itemID to be updated: ")
-        cursor.execute("UPDATE inventory SET itemQuantity = itemQuantity - ? WHERE itemId = ?", (quantitySub, itemNum))
-        connection.commit()
+    def updateInventory(self, quantitySub, itemName):
 
-        print("\nInventory Updated\n")
-        cursor.execute("SELECT * FROM inventory WHERE itemId= ?", (itemNum,))
+        # updates the database
+        cursor.execute("UPDATE inventory SET itemQuantity = itemQuantity - ? WHERE itemName = ?", (quantitySub, itemName))
+        connection.commit()
+        
+        cursor.execute("SELECT * FROM inventory WHERE itemId= ?", (itemName,))
 
     # adds items to database
+    # not needed for project but left in
     def itemAdd(self):
         name = input("Enter item name: ")
         desc = input("Enter item description: ")
@@ -66,6 +68,7 @@ class Inventory:
         print("item added\n")
 
     # removes items from database
+    # not needed for project but left in
     def itemRemove(self):
         itemRemove = int(input("Enter item ID to be deleted: "))
         cursor.execute("DELETE FROM inventory WHERE itemId= ?", (itemRemove,))
