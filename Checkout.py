@@ -26,7 +26,6 @@ def ViewCart(Mainid):
         print("ItemDescription:", x[3])
         print("ItemQuantity:", x[4])
         ItemQuantity1 = x[4]
-        print("ItemCost:", x[5])
        ##Stupid workaround
         ItemCost = x[5]
         ItemCost = ItemCost * ItemQuantity1
