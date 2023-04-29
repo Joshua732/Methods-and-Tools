@@ -29,7 +29,7 @@ def ViewCart(Mainid):
        ##Stupid workaround
         ItemCost = x[5]
         ItemCost = ItemCost * ItemQuantity1
-        print("ItemCost:"ItemCost)
+        print("ItemCost:", ItemCost)
         print("\n")
         cursor.close()
         connection.close()
